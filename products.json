@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "name": "Fruchtbonbons",
+        "price": 3.99,
+        "description": "Die sind extra lecker.",
+        "image": "https://www.french-corner-shop.com/4258-large_default/samia-weiche-frucht-halal-bonbons.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Zahncreme",
+        "price": 12.99,
+        "description": "Die ist toll.",
+        "image": "https://s3.eu-central-3.ionoscloud.com/dermapharm-shopware-public/media/2e/d0/3d/1696924621/4010160002000_7.png"
+    },
+    {
+        "id": 3,
+        "name": "Tischtennisschläger",
+        "price": 120.99,
+        "description": "Es ist schnell und für Profis.",
+        "image": "https://m.media-amazon.com/images/I/71e2EiQvuSL._AC_SL1500_.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Kaffeemaschine",
+        "price": 350.99,
+        "description": "Hochmoderne Kaffeemaschine für den täglichen Gebrauch.",
+        "image": "images/kaffeemaschine.jpg"
+    }
+    ,
+    {
+        "id": 5,
+        "name": "Kopfhörer",
+        "price": 199.99,
+        "description": "TECKNET Bluetooth-Kopfhörer Over-Ear, 70 Stunden Spielzeit und 6 EQ-Modi kabellose Kopfhörer.",
+        "image": "https://de.tecknet.com/cdn/shop/files/TECKNETBluetoothHeadphones-1_800x.jpg?v=1720000387"
+    },
+    {
+        "id": 6,
+        "name": "Pullover",
+        "price": 990.00,
+        "description": "Dieser Moncler Grenoble Pullover für Damen ist eine Anspielung auf die klassische alpine Freizeitkleidung und besticht durch ein skurriles Jacquard-Muster.",
+        "image": "https://moncler-cdn.thron.com/delivery/public/image/moncler/J20989C00001M4504F22_R/dpx6uv/std/768x1152/pullover-aus-wolle,-mohair-und-alpaka-damen-bunt-moncler.jpg?scalemode=centered&adjustcrop=reduce&quality=80&format=avif"
+    }
+]
