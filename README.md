@@ -1,6 +1,6 @@
 # Mini Online Shop
 
-Willkommen im **Mini Online Shop** – einem einfachen, aber funktionsreichen Onlineshop, der als Übungsprojekt zur Anwendung von Git, GitHub und PHP entwickelt wurde. Dieses Projekt demonstriert, wie man ein Webprojekt strukturiert, Dateien organisiert und Änderungen mit Git versioniert.
+Willkommen im **Mini Online Shop** – einem einfachen, aber funktionsreichen Onlineshop, der als Übungsprojekt zur Anwendung von Git, GitHub und PHP entwickelt wurde. Dieses Projekt demonstriert, wie man ein Webprojekt strukturiert, Dateien organisiert und Änderungen mit Git versioniert..
 
 ## Features
 
