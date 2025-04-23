@@ -1,44 +1,46 @@
 <?php
-session_start();
+session_start(); // Startet die Session für den Benutzer
 
-// تحميل بيانات المنتجات من ملف JSON
+// Laden der Produktdaten aus einer JSON-Datei
 $jsonData = file_get_contents("products.json");
 if ($jsonData === false) {
-    die("Fehler beim Laden der Produktdaten.");
+    die("Fehler beim Laden der Produktdaten."); // Fehlermeldung beim Laden
 }
 $products = json_decode($jsonData, true);
 if ($products === null) {
-    die("Fehler beim Dekodieren der JSON-Daten.");
+    die("Fehler beim Dekodieren der JSON-Daten."); // JSON konnte nicht dekodiert werden
 }
 
-// قراءة قيمة البحث (إن وجدت) وتصفية المنتجات
+// Verarbeiten der Suchanfrage (falls vorhanden)
 $searchQuery = "";
 if (isset($_GET['search'])) {
     $searchQuery = trim($_GET['search']);
     if ($searchQuery !== "") {
         $filteredProducts = [];
         foreach ($products as $product) {
-            // تحقق إذا كان اسم المنتج يحتوي على عبارة البحث (غير حساس لحالة الأحرف)
+            // Falls der Produktname die Suchanfrage enthält (nicht case-sensitiv)
             if (stripos($product['name'], $searchQuery) !== false) {
                 $filteredProducts[] = $product;
             }
         }
-        $products = $filteredProducts;
+        $products = $filteredProducts; // Nur gefundene Produkte anzeigen
     }
 }
 
-// معالجة إضافة المنتج إلى عربة التسوق
+// Produkt zum Warenkorb hinzufügen
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
     $product_price = $_POST['product_price'];
 
+    // Initialisierung des Warenkorbs, falls nicht vorhanden
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
 
     $found = false;
     foreach ($_SESSION['cart'] as $key => $item) {
+        // Wenn Produkt bereits im Warenkorb ist, erhöhe die Menge
         if ($item['id'] == $product_id) {
             $_SESSION['cart'][$key]['quantity']++;
             $found = true;
@@ -46,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
         }
     }
 
+    // Wenn Produkt neu ist, füge es hinzu
     if (!$found) {
         $_SESSION['cart'][] = [
             'id' => $product_id,
@@ -67,33 +70,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
 </head>
 <body>
     <header>
-        <?php require_once("login.php"); ?>
+        <?php require_once("login.php"); // Login-System ?>
         <h1>Onlineshop - Produkte</h1>
-        <?php require_once("templates/navigation.php"); ?>
+        <?php require_once("templates/navigation.php"); // Navigationsleiste ?>
     </header>
 
-    <!-- نموذج البحث -->
+    <!-- Suchformular -->
     <form action="produkte.php" method="get" style="margin: 30px 0;">
         <input type="text" name="search" placeholder="Produkt suchen..." value="<?php echo htmlspecialchars($searchQuery); ?>">
-        <button type="submit">Suchen </button>
-        
-
+        <button type="submit">Suchen</button>
     </form>
 
-    <!-- حاوية لجميع المنتجات -->
+    <!-- Container für alle Produkte -->
     <div class="product-container">
         <?php foreach ($products as $product): ?>
             <div class="product-item">
                 <h2>
+                    <!-- Produktlink zur Detailseite -->
                     <a href="produkt_detail.php?id=<?php echo $product['id']; ?>">
                         <?php echo htmlspecialchars($product['name']); ?>
                     </a>
                 </h2>
                 <p><?php echo htmlspecialchars($product['description']); ?></p>
                 <?php if (isset($product['image'])): ?>
+                    <!-- Produktbild anzeigen -->
                     <img src="<?php echo htmlspecialchars($product['image']); ?>" width="200" alt="<?php echo htmlspecialchars($product['name']); ?>">
                 <?php endif; ?>
                 <p>Preis: €<?php echo number_format($product['price'], 2); ?></p>
+
+                <!-- Button zum Warenkorb hinzufügen, nur wenn eingeloggt -->
                 <?php if (isset($_SESSION['eingeloggt'])): ?>
                     <form action="produkte.php" method="POST">
                         <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
@@ -106,6 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
         <?php endforeach; ?>
     </div>
 
-    <?php require_once("templates/footer.php"); ?>
+    <?php require_once("templates/footer.php"); // Seitenfuß ?>
 </body>
 </html>
